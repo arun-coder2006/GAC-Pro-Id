@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Edit Student - GAC-Pro-I'd
+    </title>
+
+
+    <style>
+
+        /* =========================================================
+           BASE
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: #0f172a;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8fbff 0%,
+                    #eef7ff 48%,
+                    #e0f2fe 100%
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 30px 18px;
+
+            position: relative;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================================================
+           BACKGROUND TECHNICAL EFFECTS
+        ========================================================= */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            width: 420px;
+
+            height: 420px;
+
+            top: -180px;
+
+            right: -150px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(
+                        56,
+                        189,
+                        248,
+                        0.20
+                    ) 0%,
+                    rgba(
+                        56,
+                        189,
+                        248,
+                        0
+                    ) 70%
+                );
+
+            pointer-events: none;
+        }
+
+
+        body::after {
+
+            content: "";
+
+            position: fixed;
+
+            width: 420px;
+
+            height: 420px;
+
+            bottom: -220px;
+
+            left: -180px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(
+                        37,
+                        99,
+                        235,
+                        0.14
+                    ) 0%,
+                    rgba(
+                        37,
+                        99,
+                        235,
+                        0
+                    ) 70%
+                );
+
+            pointer-events: none;
+        }
+
+
+        /* =========================================================
+           MAIN CONTAINER
+        ========================================================= */
+
+        .container {
+
+            width: 100%;
+
+            max-width: 620px;
+
+            position: relative;
+
+            z-index: 1;
+        }
+
+
+        /* =========================================================
+           MAIN CARD
+        ========================================================= */
+
+        .box {
+
+            width: 100%;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.96
+                );
+
+            border:
+                1px solid #dbeafe;
+
+            border-radius: 4px;
+
+            box-shadow:
+                0 20px 55px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.11
+                );
+
+            overflow: hidden;
+
+            position: relative;
+
+            animation:
+                cardEnter
+                0.55s
+                ease
+                both;
+        }
+
+
+        @keyframes cardEnter {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(18px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        /* =========================================================
+           TOP BLUE ACCENT
+        ========================================================= */
+
+        .top-accent {
+
+            height: 5px;
+
+            width: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #38bdf8
+                );
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        .card-header {
+
+            padding:
+                30px
+                34px
+                24px;
+
+            border-bottom:
+                1px solid #e5edf7;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #fafdff 100%
+                );
+        }
+
+
+        .header-label {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            margin-bottom: 11px;
+
+            color: #2563eb;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+
+        .header-label::before {
+
+            content: "";
+
+            width: 22px;
+
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #38bdf8
+                );
+        }
+
+
+        h1 {
+
+            margin: 0;
+
+            color: #0f172a;
+
+            font-size: 29px;
+
+            line-height: 1.2;
+
+            font-weight: 700;
+
+            letter-spacing: -0.6px;
+        }
+
+
+        .department {
+
+            margin-top: 8px;
+
+            color: #2563eb;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================================
+           STUDENT INFORMATION
+        ========================================================= */
+
+        .student-info {
+
+            margin:
+                28px
+                34px
+                0;
+
+            border:
+                1px solid #dbeafe;
+
+            border-radius: 3px;
+
+            overflow: hidden;
+
+            background: #f8fbff;
+        }
+
+
+        .info-title {
+
+            padding:
+                12px
+                16px;
+
+            background: #eff6ff;
+
+            border-bottom:
+                1px solid #dbeafe;
+
+            color: #1e3a8a;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+
+        .info-row {
+
+            display: grid;
+
+            grid-template-columns:
+                125px
+                1fr;
+
+            min-height: 45px;
+
+            align-items: center;
+
+            border-bottom:
+                1px solid #e5edf7;
+        }
+
+
+        .info-row:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .info-label {
+
+            padding:
+                11px
+                15px;
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+
+        .info-value {
+
+            padding:
+                11px
+                15px;
+
+            color: #0f172a;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            word-break: break-word;
+        }
+
+
+        /* =========================================================
+           FORM CONTENT
+        ========================================================= */
+
+        .form-content {
+
+            padding:
+                28px
+                34px
+                32px;
+        }
+
+
+        /* =========================================================
+           FORM GROUP
+        ========================================================= */
+
+        .form-group {
+
+            margin-bottom: 21px;
+        }
+
+
+        .form-group:last-of-type {
+
+            margin-bottom: 24px;
+        }
+
+
+        /* =========================================================
+           LABELS
+        ========================================================= */
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #1e293b;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.15px;
+        }
+
+
+        /* =========================================================
+           INPUTS
+        ========================================================= */
+
+        input[type="text"],
+        input[type="file"] {
+
+            width: 100%;
+
+            min-height: 48px;
+
+            padding:
+                12px
+                14px;
+
+            border:
+                1px solid #cbd5e1;
+
+            border-radius: 3px;
+
+            background: #ffffff;
+
+            color: #0f172a;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+
+        input[type="text"]:hover,
+        input[type="file"]:hover {
+
+            border-color: #93c5fd;
+        }
+
+
+        input[type="text"]:focus {
+
+            border-color: #2563eb;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.10
+                );
+        }
+
+
+        /* =========================================================
+           FILE INPUT
+        ========================================================= */
+
+        input[type="file"] {
+
+            padding:
+                9px
+                10px;
+
+            cursor: pointer;
+
+            background: #f8fbff;
+        }
+
+
+        input[type="file"]::file-selector-button {
+
+            margin-right: 10px;
+
+            padding:
+                7px
+                12px;
+
+            border: none;
+
+            border-radius: 3px;
+
+            background: #e0f2fe;
+
+            color: #1d4ed8;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease;
+        }
+
+
+        input[type="file"]::file-selector-button:hover {
+
+            background: #dbeafe;
+        }
+
+
+        /* =========================================================
+           CHECKBOX / REPRESENTATIVE
+        ========================================================= */
+
+        .leader-group {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding:
+                13px
+                14px;
+
+            border:
+                1px solid #dbeafe;
+
+            border-radius: 3px;
+
+            background: #f8fbff;
+
+            transition:
+                border-color 0.2s ease,
+                background 0.2s ease;
+        }
+
+
+        .leader-group:hover {
+
+            border-color: #93c5fd;
+
+            background: #f0f8ff;
+        }
+
+
+        input[type="checkbox"] {
+
+            width: 18px;
+
+            height: 18px;
+
+            margin: 0;
+
+            accent-color: #2563eb;
+
+            cursor: pointer;
+
+            flex-shrink: 0;
+        }
+
+
+        .leader-group label {
+
+            margin: 0;
+
+            color: #334155;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================================================
+           HELP TEXT
+        ========================================================= */
+
+        .help {
+
+            margin-top: 7px;
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================================
+           DJANGO ERRORS
+        ========================================================= */
+
+        .errorlist {
+
+            margin:
+                7px
+                0
+                0;
+
+            padding-left: 18px;
+
+            color: #dc2626;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================================
+           NON FIELD ERRORS
+        ========================================================= */
+
+        .form-content > .errorlist {
+
+            margin-bottom: 20px;
+
+            padding:
+                11px
+                14px;
+
+            border:
+                1px solid #fecaca;
+
+            border-left:
+                3px solid #dc2626;
+
+            background: #fff7f7;
+
+            color: #b91c1c;
+        }
+
+
+        /* =========================================================
+           BUTTON AREA
+        ========================================================= */
+
+        .buttons {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 26px;
+
+            flex-wrap: wrap;
+        }
+
+
+        /* =========================================================
+           BUTTON BASE
+        ========================================================= */
+
+        .btn {
+
+            min-height: 49px;
+
+            padding:
+                12px
+                20px;
+
+            border: none;
+
+            border-radius: 3px;
+
+            text-decoration: none;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                filter 0.2s ease;
+        }
+
+
+        /* =========================================================
+           SAVE BUTTON
+        ========================================================= */
+
+        .save {
+
+            flex: 1;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    #2563eb,
+                    #0ea5e9
+                );
+
+            color: #ffffff;
+
+            box-shadow:
+                0 8px 18px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.20
+                );
+        }
+
+
+        .save:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 12px 25px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.27
+                );
+
+            filter: brightness(1.03);
+        }
+
+
+        .save:active {
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =========================================================
+           CANCEL BUTTON
+        ========================================================= */
+
+        .cancel {
+
+            min-width: 130px;
+
+            background: #f1f5f9;
+
+            color: #475569;
+
+            border:
+                1px solid #cbd5e1;
+        }
+
+
+        .cancel:hover {
+
+            background: #e2e8f0;
+
+            color: #0f172a;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 7px 15px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.08
+                );
+        }
+
+
+        .cancel:active {
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =========================================================
+           FOCUS ACCESSIBILITY
+        ========================================================= */
+
+        .btn:focus-visible {
+
+            outline:
+                3px solid
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.25
+                );
+
+            outline-offset: 2px;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 600px) {
+
+            body {
+
+                padding:
+                    18px
+                    12px;
+
+                align-items: center;
+            }
+
+
+            .container {
+
+                max-width: 100%;
+            }
+
+
+            .card-header {
+
+                padding:
+                    25px
+                    22px
+                    21px;
+            }
+
+
+            .student-info {
+
+                margin:
+                    22px
+                    22px
+                    0;
+            }
+
+
+            .form-content {
+
+                padding:
+                    22px
+                    22px
+                    25px;
+            }
+
+
+            h1 {
+
+                font-size: 25px;
+            }
+
+
+            .department {
+
+                font-size: 13px;
+            }
+
+
+            .info-row {
+
+                grid-template-columns:
+                    110px
+                    1fr;
+            }
+
+
+            .info-label,
+            .info-value {
+
+                padding:
+                    10px
+                    11px;
+            }
+
+
+            input[type="text"],
+            input[type="file"] {
+
+                min-height: 47px;
+
+                font-size: 14px;
+            }
+
+
+            .buttons {
+
+                flex-direction: column;
+            }
+
+
+            .save,
+            .cancel {
+
+                width: 100%;
+
+                min-width: 0;
+            }
+
+        }
+
+
+        @media (max-width: 400px) {
+
+            body {
+
+                padding:
+                    12px
+                    10px;
+            }
+
+
+            .card-header {
+
+                padding:
+                    22px
+                    18px
+                    19px;
+            }
+
+
+            .student-info {
+
+                margin:
+                    19px
+                    18px
+                    0;
+            }
+
+
+            .form-content {
+
+                padding:
+                    19px
+                    18px
+                    22px;
+            }
+
+
+            h1 {
+
+                font-size: 23px;
+            }
+
+
+            .header-label {
+
+                font-size: 10px;
+
+                letter-spacing: 1.2px;
+            }
+
+
+            .info-row {
+
+                grid-template-columns:
+                    100px
+                    1fr;
+            }
+
+
+            .info-label {
+
+                font-size: 11px;
+            }
+
+
+            .info-value {
+
+                font-size: 12px;
+            }
+
+
+            label {
+
+                font-size: 12px;
+            }
+
+
+            input[type="text"] {
+
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="box">
+
+
+        <!-- =====================================================
+             TOP ACCENT
+        ====================================================== -->
+
+        <div class="top-accent"></div>
+
+
+        <!-- =====================================================
+             HEADER
+        ====================================================== -->
+
+        <div class="card-header">
+
+
+            <div class="header-label">
+
+                Admin Portal
+
+            </div>
+
+
+            <h1>
+
+                Edit Student
+
+            </h1>
+
+
+            <div class="department">
+
+                {{ department.name }}
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =====================================================
+             STUDENT INFORMATION
+        ====================================================== -->
+
+        <div class="student-info">
+
+
+            <div class="info-title">
+
+                Student Information
+
+            </div>
+
+
+            <div class="info-row">
+
+                <div class="info-label">
+
+                    Application
+
+                </div>
+
+                <div class="info-value">
+
+                    {{ student.student_key }}
+
+                </div>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <div class="info-label">
+
+                    Department
+
+                </div>
+
+                <div class="info-value">
+
+                    {{ department.name }}
+
+                </div>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <div class="info-label">
+
+                    Academic Year
+
+                </div>
+
+                <div class="info-value">
+
+                    {{ year }}
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =====================================================
+             FORM
+        ====================================================== -->
+
+        <div class="form-content">
+
+
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+            >
+
+                {% csrf_token %}
+
+
+                {{ form.non_field_errors }}
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    {{ form.name.label_tag }}
+
+                    {{ form.name }}
+
+                    {{ form.name.errors }}
+
+                </div>
+
+
+                <!-- TO PLACE -->
+
+                <div class="form-group">
+
+                    {{ form.to_place.label_tag }}
+
+                    {{ form.to_place }}
+
+                    {{ form.to_place.errors }}
+
+                </div>
+
+
+                <!-- ROLL NUMBER -->
+
+                <div class="form-group">
+
+                    {{ form.roll_no.label_tag }}
+
+                    {{ form.roll_no }}
+
+                    {{ form.roll_no.errors }}
+
+                </div>
+
+
+                <!-- PHOTO -->
+
+                <div class="form-group">
+
+                    {{ form.photo.label_tag }}
+
+                    {{ form.photo }}
+
+
+                    <div class="help">
+
+                        Leave empty to keep the existing photo.
+
+                    </div>
+
+
+                    {{ form.photo.errors }}
+
+                </div>
+
+
+                <!-- REPRESENTATIVE -->
+
+                <div class="form-group">
+
+                    <div class="leader-group">
+
+                        {{ form.is_leader }}
+
+                        {{ form.is_leader.label_tag }}
+
+                    </div>
+
+
+                    {{ form.is_leader.errors }}
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="buttons">
+
+
+                    <button
+                        type="submit"
+                        class="btn save"
+                    >
+
+                        Save Changes
+
+                    </button>
+
+
+                    <a
+                        href="{% url 'admin_year_students' year %}"
+                        class="btn cancel"
+                    >
+
+                        Cancel
+
+                    </a>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

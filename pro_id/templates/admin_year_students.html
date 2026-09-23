@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>{{ department.name }} - {{ year }} Students</title>
+
+
+    <style>
+
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #38bdf8;
+
+            --light-blue: #e0f2fe;
+            --page-bg: #f8fbff;
+
+            --white: #ffffff;
+
+            --text: #0f172a;
+            --secondary-text: #475569;
+            --muted: #64748b;
+
+            --border: #dbeafe;
+            --table-border: #e5edf7;
+
+            --success: #15803d;
+            --success-bg: #ecfdf5;
+
+            --warning: #c2410c;
+            --warning-bg: #fff7ed;
+
+            --danger: #dc2626;
+            --danger-bg: #fef2f2;
+
+            --purple: #7c3aed;
+            --purple-bg: #f5f3ff;
+
+            --shadow:
+                0 8px 30px rgba(37, 99, 235, 0.08);
+
+            --shadow-hover:
+                0 12px 35px rgba(37, 99, 235, 0.14);
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            padding: 28px;
+
+            padding-bottom: 110px;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(56, 189, 248, 0.13),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #f8fbff 0%,
+                    #eef7ff 50%,
+                    #f8fbff 100%
+                );
+
+            font-family:
+                Inter,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: var(--text);
+        }
+
+
+        /* =========================================================
+           MAIN CONTAINER
+        ========================================================= */
+
+        .container {
+
+            width: 100%;
+
+            max-width: 1180px;
+
+            margin: 0 auto;
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        .header {
+
+            position: relative;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff 0%,
+                    #f0f9ff 100%
+                );
+
+            border: 1px solid var(--border);
+
+            border-left: 4px solid var(--primary);
+
+            padding: 25px 28px;
+
+            margin-bottom: 18px;
+
+            box-shadow: var(--shadow);
+        }
+
+
+        .header::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+
+            height: 180px;
+
+            right: -80px;
+
+            top: -90px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(37, 99, 235, 0.12),
+                    transparent 70%
+                );
+
+            pointer-events: none;
+        }
+
+
+        .header h1 {
+
+            position: relative;
+
+            z-index: 1;
+
+            margin: 0 0 7px;
+
+            font-size: 25px;
+
+            font-weight: 750;
+
+            letter-spacing: -0.4px;
+
+            color: var(--text);
+        }
+
+
+        .header p {
+
+            position: relative;
+
+            z-index: 1;
+
+            margin: 0;
+
+            color: var(--secondary-text);
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           SUMMARY
+        ========================================================= */
+
+        .summary {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            background: var(--white);
+
+            border: 1px solid var(--border);
+
+            padding: 15px 18px;
+
+            margin-bottom: 14px;
+
+            box-shadow: 0 5px 22px rgba(15, 23, 42, 0.05);
+        }
+
+
+        .student-count {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: var(--text);
+        }
+
+
+        .student-count::before {
+
+            content: "";
+
+            width: 9px;
+
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: var(--primary);
+
+            box-shadow:
+                0 0 0 4px var(--light-blue);
+        }
+
+
+        .student-count span {
+
+            color: var(--primary);
+
+            font-size: 17px;
+
+            font-weight: 800;
+        }
+
+
+        /* =========================================================
+           DELETE YEAR
+        ========================================================= */
+
+        .delete-year-form {
+
+            margin: 0;
+        }
+
+
+        .delete-year-btn {
+
+            border: 1px solid #fecaca;
+
+            background: var(--danger-bg);
+
+            color: var(--danger);
+
+            padding: 9px 15px;
+
+            border-radius: 4px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+
+        .delete-year-btn:hover {
+
+            background: var(--danger);
+
+            color: white;
+
+            border-color: var(--danger);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================================
+           TABLE WRAPPER
+        ========================================================= */
+
+        .table-container {
+
+            background: var(--white);
+
+            border: 1px solid var(--border);
+
+            overflow-x: auto;
+
+            box-shadow: var(--shadow);
+
+            scrollbar-width: thin;
+
+            scrollbar-color:
+                #bfdbfe
+                transparent;
+        }
+
+
+        .table-container::-webkit-scrollbar {
+
+            height: 7px;
+        }
+
+
+        .table-container::-webkit-scrollbar-thumb {
+
+            background: #bfdbfe;
+
+            border-radius: 20px;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 780px;
+        }
+
+
+        /* =========================================================
+           TABLE HEADER
+        ========================================================= */
+
+        thead {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #eff6ff,
+                    #f0f9ff
+                );
+        }
+
+
+        th {
+
+            padding: 14px 14px;
+
+            text-align: left;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.7px;
+
+            text-transform: uppercase;
+
+            color: #334155;
+
+            border-bottom: 1px solid #cfe3f7;
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================================================
+           TABLE BODY
+        ========================================================= */
+
+        td {
+
+            padding: 14px;
+
+            border-bottom: 1px solid var(--table-border);
+
+            font-size: 14px;
+
+            vertical-align: middle;
+
+            color: var(--secondary-text);
+        }
+
+
+        tbody tr {
+
+            transition:
+                background 0.18s ease,
+                box-shadow 0.18s ease;
+        }
+
+
+        tbody tr:hover {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #f8fbff,
+                    #f0f9ff
+                );
+        }
+
+
+        tbody tr:last-child td {
+
+            border-bottom: none;
+        }
+
+
+        .sno {
+
+            width: 70px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+            font-weight: 700;
+        }
+
+
+        .name {
+
+            min-width: 220px;
+
+            color: var(--text);
+
+            font-weight: 700;
+        }
+
+
+        .application {
+
+            min-width: 230px;
+
+            color: #334155;
+
+            font-family:
+                "Cascadia Mono",
+                Consolas,
+                monospace;
+
+            font-size: 12px;
+        }
+
+
+        .generated {
+
+            width: 150px;
+        }
+
+
+        .select-column {
+
+            width: 80px;
+
+            text-align: center;
+        }
+
+
+        /* =========================================================
+           GENERATED STATUS
+        ========================================================= */
+
+        .status {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 5px 9px;
+
+            border-radius: 4px;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.2px;
+        }
+
+
+        .status::before {
+
+            content: "";
+
+            width: 6px;
+
+            height: 6px;
+
+            border-radius: 50%;
+        }
+
+
+        .generated-yes {
+
+            background: var(--success-bg);
+
+            color: var(--success);
+
+            border: 1px solid #bbf7d0;
+        }
+
+
+        .generated-yes::before {
+
+            background: #22c55e;
+        }
+
+
+        .generated-no {
+
+            background: var(--warning-bg);
+
+            color: var(--warning);
+
+            border: 1px solid #fed7aa;
+        }
+
+
+        .generated-no::before {
+
+            background: #f97316;
+        }
+
+
+        /* =========================================================
+           REPRESENTATIVE
+        ========================================================= */
+
+        .representative {
+
+            display: inline-block;
+
+            margin-left: 7px;
+
+            padding: 3px 6px;
+
+            background: var(--purple-bg);
+
+            border: 1px solid #ddd6fe;
+
+            color: var(--purple);
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.4px;
+
+            vertical-align: middle;
+        }
+
+
+        /* =========================================================
+           RADIO BUTTON
+        ========================================================= */
+
+        input[type="radio"] {
+
+            appearance: none;
+
+            width: 17px;
+
+            height: 17px;
+
+            margin: 0;
+
+            border: 2px solid #94a3b8;
+
+            border-radius: 50%;
+
+            background: white;
+
+            cursor: pointer;
+
+            position: relative;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        input[type="radio"]:hover {
+
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(37, 99, 235, 0.08);
+        }
+
+
+        input[type="radio"]:checked {
+
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(37, 99, 235, 0.10);
+        }
+
+
+        input[type="radio"]:checked::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 7px;
+
+            height: 7px;
+
+            top: 3px;
+
+            left: 3px;
+
+            background: var(--primary);
+
+            border-radius: 50%;
+        }
+
+
+        /* =========================================================
+           EMPTY TABLE
+        ========================================================= */
+
+        .empty-state {
+
+            text-align: center;
+
+            padding: 55px 20px !important;
+
+            color: var(--muted);
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           STICKY ACTION BAR
+        ========================================================= */
+
+        .action-bar {
+
+            position: fixed;
+
+            left: 0;
+
+            right: 0;
+
+            bottom: 0;
+
+            min-height: 68px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.94
+                );
+
+            backdrop-filter: blur(14px);
+
+            -webkit-backdrop-filter: blur(14px);
+
+            border-top: 1px solid #dbeafe;
+
+            padding: 11px 18px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 8px;
+
+            box-shadow:
+                0 -8px 30px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.08
+                );
+
+            z-index: 1000;
+        }
+
+
+        .action-bar button,
+        .action-bar a {
+
+            border: none;
+
+            padding: 10px 16px;
+
+            min-height: 38px;
+
+            border-radius: 4px;
+
+            font-size: 12px;
+
+            font-weight: 750;
+
+            letter-spacing: 0.1px;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            white-space: nowrap;
+
+            transition:
+                transform 0.18s ease,
+                box-shadow 0.18s ease,
+                background 0.18s ease,
+                opacity 0.18s ease;
+        }
+
+
+        .action-bar button:hover:not(:disabled),
+        .action-bar a:hover:not(.disabled) {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 5px 14px
+                rgba(15, 23, 42, 0.14);
+        }
+
+
+        /* BACK */
+
+        .back-btn {
+
+            background: #475569;
+
+            color: white;
+        }
+
+
+        .back-btn:hover {
+
+            background: #334155;
+        }
+
+
+        /* EDIT */
+
+        .edit-btn {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                );
+
+            color: white;
+        }
+
+
+        /* DELETE */
+
+        .delete-btn {
+
+            background: var(--danger);
+
+            color: white;
+        }
+
+
+        .delete-btn:hover:not(:disabled) {
+
+            background: #b91c1c;
+        }
+
+
+        /* REPRESENTATIVE */
+
+        .representative-btn {
+
+            background: #16a34a;
+
+            color: white;
+        }
+
+
+        .representative-btn:hover:not(:disabled) {
+
+            background: #15803d;
+        }
+
+
+        /* CANCEL REPRESENTATIVE */
+
+        .cancel-representative-btn {
+
+            background: var(--purple);
+
+            color: white;
+        }
+
+
+        .cancel-representative-btn:hover {
+
+            background: #6d28d9;
+        }
+
+
+        /* DOWNLOAD */
+
+        .download-btn {
+
+            background: #0f172a;
+
+            color: white;
+        }
+
+
+        /* DISABLED */
+
+        .action-bar button:disabled,
+        .action-bar a.disabled {
+
+            opacity: 0.38;
+
+            cursor: not-allowed;
+
+            pointer-events: none;
+
+            box-shadow: none;
+
+            transform: none;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 800px) {
+
+            body {
+
+                padding: 18px;
+
+                padding-bottom: 145px;
+            }
+
+
+            .header {
+
+                padding: 21px;
+            }
+
+
+            .header h1 {
+
+                font-size: 21px;
+            }
+
+
+            .summary {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .delete-year-form {
+
+                width: 100%;
+            }
+
+
+            .delete-year-btn {
+
+                width: 100%;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            body {
+
+                padding: 12px;
+
+                padding-bottom: 180px;
+            }
+
+
+            .header {
+
+                margin-bottom: 12px;
+
+                padding: 18px;
+            }
+
+
+            .header h1 {
+
+                font-size: 19px;
+            }
+
+
+            .header p {
+
+                font-size: 12px;
+
+                line-height: 1.5;
+            }
+
+
+            .summary {
+
+                padding: 13px;
+            }
+
+
+            .student-count {
+
+                font-size: 13px;
+            }
+
+
+            .table-container {
+
+                border-left: none;
+
+                border-right: none;
+
+                margin-left: -12px;
+
+                margin-right: -12px;
+            }
+
+
+            .action-bar {
+
+                min-height: auto;
+
+                padding: 9px;
+
+                display: grid;
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                gap: 6px;
+            }
+
+
+            .action-bar button,
+            .action-bar a {
+
+                width: 100%;
+
+                min-height: 40px;
+
+                padding: 9px 8px;
+
+                font-size: 11px;
+            }
+
+
+            .action-bar form {
+
+                width: 100%;
+            }
+
+
+            .action-bar form button {
+
+                width: 100%;
+            }
+        }
+
+
+        @media (max-width: 380px) {
+
+            .action-bar {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+
+            .action-bar button,
+            .action-bar a {
+
+                font-size: 10px;
+
+                padding-left: 5px;
+
+                padding-right: 5px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- =========================================================
+         HEADER
+    ========================================================== -->
+
+    <div class="header">
+
+        <h1>
+            {{ department.name }}
+        </h1>
+
+        <p>
+            Student List — Academic Year {{ year }}
+        </p>
+
+    </div>
+
+
+    <!-- =========================================================
+         SUMMARY
+    ========================================================== -->
+
+    <div class="summary">
+
+        <div class="student-count">
+
+            Total Students:
+
+            <span>
+                {{ students|length }}
+            </span>
+
+        </div>
+
+<form
+    method="GET"
+    action="{% url 'year_delete_confirm' year=year %}"
+    class="delete-year-form"
+>
+    <button
+        type="submit"
+        class="delete-year-btn"
+    >
+        Delete Entire {{ year }}
+    </button>
+</form>
+
+            {% csrf_token %}
+
+          
+        </form>
+
+    </div>
+
+
+    <!-- =========================================================
+         STUDENT TABLE
+    ========================================================== -->
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th class="sno">
+                        S.No
+                    </th>
+
+                    <th class="name">
+                        Name
+                    </th>
+
+                    <th class="application">
+                        Application No. / Password
+                    </th>
+
+                    <th class="generated">
+                        Generated
+                    </th>
+
+                    <th class="select-column">
+                        Select
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for student in students %}
+
+                <tr>
+
+                    <!-- S.NO -->
+
+                    <td class="sno">
+
+                        {{ forloop.counter }}
+
+                    </td>
+
+
+                    <!-- NAME -->
+
+                    <td class="name">
+
+                        {{ student.name }}
+
+                        {% if student.is_leader %}
+
+                            <span class="representative">
+                                REPRESENTATIVE
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <!-- APPLICATION NUMBER / PASSWORD -->
+
+                    <td class="application">
+
+                        {{ student.student_key }}
+
+                    </td>
+
+
+                    <!-- GENERATED -->
+
+                    <td class="generated">
+
+                        {% if student.pdf_generated %}
+
+                            <span class="status generated-yes">
+                                Generated
+                            </span>
+
+                        {% else %}
+
+                            <span class="status generated-no">
+                                Not Generated
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <!-- SELECT -->
+
+                    <td class="select-column">
+
+                        <input
+                            type="radio"
+                            name="selected_student"
+                            value="{{ student.id }}"
+
+                            data-edit-url="{% url 'admin_edit_student' student.id %}"
+
+                            data-delete-url="{% url 'admin_delete_student' student.id %}"
+
+                            data-representative-url="{% url 'admin_make_representative' student.id %}"
+
+                            data-cancel-representative-url="{% url 'admin_cancel_representative' student.id %}"
+
+                            data-is-representative="{% if student.is_leader %}true{% else %}false{% endif %}"
+
+                            onchange="selectStudent(this)"
+                        >
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td
+                        colspan="5"
+                        class="empty-state"
+                    >
+
+                        No students found for {{ year }}.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     STICKY ACTION BAR
+========================================================= -->
+
+<div class="action-bar">
+
+
+    <!-- BACK -->
+
+    <a
+        href="{% url 'admin_dashboard' %}"
+        class="back-btn"
+    >
+        Back
+    </a>
+
+
+    <!-- EDIT -->
+
+    <a
+        id="editButton"
+        href="#"
+        class="edit-btn disabled"
+    >
+        Edit
+    </a>
+
+
+    <!-- DELETE -->
+
+    <form
+    id="deleteForm"
+    method="GET"
+    action="#"
+    style="margin:0;"
+>
+
+        {% csrf_token %}
+
+        <button
+            type="submit"
+            id="deleteButton"
+            class="delete-btn"
+            disabled
+        >
+            Delete
+        </button>
+
+    </form>
+
+
+    <!-- MAKE REPRESENTATIVE -->
+
+    <form
+        id="representativeForm"
+        method="POST"
+        action="#"
+
+        style="margin:0;"
+    >
+
+        {% csrf_token %}
+
+        <button
+            type="submit"
+            id="representativeButton"
+            class="representative-btn"
+            disabled
+        >
+            Make Representative
+        </button>
+
+    </form>
+
+
+    <!-- CANCEL REPRESENTATIVE -->
+
+    <form
+        id="cancelRepresentativeForm"
+        method="POST"
+        action="#"
+
+        style="
+            margin:0;
+            display:none;
+        "
+
+        onsubmit="return confirm(
+            'Cancel representative status for this student?'
+        );"
+    >
+
+        {% csrf_token %}
+
+        <button
+            type="submit"
+            class="cancel-representative-btn"
+        >
+            Cancel Representative
+        </button>
+
+    </form>
+
+
+</div>
+
+
+<script>
+
+
+    /* =========================================================
+       STUDENT SELECTION
+    ========================================================== */
+
+    function selectStudent(radio) {
+
+        const editButton =
+            document.getElementById(
+                "editButton"
+            );
+
+
+        const deleteButton =
+            document.getElementById(
+                "deleteButton"
+            );
+
+
+        const deleteForm =
+            document.getElementById(
+                "deleteForm"
+            );
+
+
+        const representativeButton =
+            document.getElementById(
+                "representativeButton"
+            );
+
+
+        const representativeForm =
+            document.getElementById(
+                "representativeForm"
+            );
+
+
+        const cancelForm =
+            document.getElementById(
+                "cancelRepresentativeForm"
+            );
+
+
+        /* --------------------------------
+           GET URLS
+        -------------------------------- */
+
+        const editUrl =
+            radio.dataset.editUrl;
+
+
+        const deleteUrl =
+            radio.dataset.deleteUrl;
+
+
+        const representativeUrl =
+            radio.dataset.representativeUrl;
+
+
+        const cancelRepresentativeUrl =
+            radio.dataset.cancelRepresentativeUrl;
+
+
+        const isRepresentative =
+            radio.dataset.isRepresentative === "true";
+
+
+        /* --------------------------------
+           ENABLE EDIT
+        -------------------------------- */
+
+        editButton.href =
+            editUrl;
+
+
+        editButton.classList.remove(
+            "disabled"
+        );
+
+
+        /* --------------------------------
+           ENABLE DELETE
+        -------------------------------- */
+
+        deleteForm.action =
+            deleteUrl;
+
+
+        deleteButton.disabled =
+            false;
+
+
+        /* --------------------------------
+           REPRESENTATIVE BUTTON
+        -------------------------------- */
+
+        if (isRepresentative) {
+
+            representativeForm.style.display =
+                "none";
+
+
+            cancelForm.style.display =
+                "block";
+
+
+            cancelForm.action =
+                cancelRepresentativeUrl;
+
+        }
+
+        else {
+
+            representativeForm.style.display =
+                "block";
+
+
+            representativeButton.disabled =
+                false;
+
+
+            cancelForm.style.display =
+                "none";
+
+        }
+
+
+        /* --------------------------------
+           STORE SELECTED STUDENT
+        -------------------------------- */
+
+        window.selectedStudent =
+            radio.value;
+
+    }
+
+
+    /* =========================================================
+       PREVENT DOUBLE REPRESENTATIVE SUBMISSION
+    ========================================================== */
+
+    document
+        .getElementById(
+            "representativeForm"
+        )
+        .addEventListener(
+            "submit",
+            function () {
+
+                const button =
+                    document.getElementById(
+                        "representativeButton"
+                    );
+
+
+                button.disabled =
+                    true;
+
+
+                button.innerText =
+                    "Updating...";
+
+            }
+        );
+
+
+    /* =========================================================
+       PREVENT DOUBLE CANCEL SUBMISSION
+    ========================================================== */
+
+    document
+        .getElementById(
+            "cancelRepresentativeForm"
+        )
+        .addEventListener(
+            "submit",
+            function () {
+
+                const button =
+                    this.querySelector(
+                        "button"
+                    );
+
+
+                button.disabled =
+                    true;
+
+
+                button.innerText =
+                    "Cancelling...";
+
+            }
+        );
+
+
+</script>
+
+
+</body>
+
+</html>

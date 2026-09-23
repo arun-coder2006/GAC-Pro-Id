@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Preview - GAC-Pro-I'd</title>
+
+
+    <style>
+
+        /* =========================================================
+           BASE
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: #0f172a;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8fbff 0%,
+                    #eef7ff 48%,
+                    #e0f2fe 100%
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 30px 18px;
+
+            position: relative;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================================================
+           BACKGROUND GLOW
+        ========================================================= */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            width: 430px;
+
+            height: 430px;
+
+            top: -190px;
+
+            right: -160px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(
+                        56,
+                        189,
+                        248,
+                        0.20
+                    ) 0%,
+                    rgba(
+                        56,
+                        189,
+                        248,
+                        0
+                    ) 70%
+                );
+
+            pointer-events: none;
+        }
+
+
+        body::after {
+
+            content: "";
+
+            position: fixed;
+
+            width: 430px;
+
+            height: 430px;
+
+            bottom: -220px;
+
+            left: -180px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(
+                        37,
+                        99,
+                        235,
+                        0.14
+                    ) 0%,
+                    rgba(
+                        37,
+                        99,
+                        235,
+                        0
+                    ) 70%
+                );
+
+            pointer-events: none;
+        }
+
+
+        /* =========================================================
+           MAIN CONTAINER
+        ========================================================= */
+
+        .container {
+
+            width: 100%;
+
+            max-width: 650px;
+
+            position: relative;
+
+            z-index: 1;
+        }
+
+
+        /* =========================================================
+           MAIN CARD
+        ========================================================= */
+
+        .card {
+
+            width: 100%;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.97
+                );
+
+            border:
+                1px solid #dbeafe;
+
+            border-radius: 4px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 22px 60px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.12
+                );
+
+            animation:
+                cardEnter
+                0.55s
+                ease
+                both;
+        }
+
+
+        @keyframes cardEnter {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(18px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        /* =========================================================
+           TOP ACCENT
+        ========================================================= */
+
+        .top-accent {
+
+            height: 5px;
+
+            width: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #38bdf8
+                );
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        .card-header {
+
+            padding:
+                30px
+                34px
+                24px;
+
+            border-bottom:
+                1px solid #e5edf7;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #fafdff 100%
+                );
+        }
+
+
+        .header-label {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            margin-bottom: 11px;
+
+            color: #2563eb;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+
+        .header-label::before {
+
+            content: "";
+
+            width: 22px;
+
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #38bdf8
+                );
+        }
+
+
+        h1 {
+
+            margin: 0;
+
+            color: #0f172a;
+
+            font-size: 28px;
+
+            line-height: 1.2;
+
+            font-weight: 700;
+
+            letter-spacing: -0.5px;
+        }
+
+
+        .subtitle {
+
+            margin-top: 8px;
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================================
+           CONTENT
+        ========================================================= */
+
+        .content {
+
+            padding:
+                28px
+                34px
+                32px;
+        }
+
+
+        /* =========================================================
+           PHOTO
+        ========================================================= */
+
+        .photo-section {
+
+            display: flex;
+
+            justify-content: center;
+
+            margin-bottom: 25px;
+        }
+
+
+        .photo-frame {
+
+            position: relative;
+
+            padding: 5px;
+
+            background: #ffffff;
+
+            border:
+                1px solid #bfdbfe;
+
+            box-shadow:
+                0 10px 25px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.10
+                );
+        }
+
+
+        .photo img {
+
+            display: block;
+
+            width: 150px;
+
+            height: 190px;
+
+            object-fit: contain;
+
+            border:
+                1px solid #cbd5e1;
+
+            background: #f8fbff;
+        }
+
+
+        /* =========================================================
+           DETAILS
+        ========================================================= */
+
+        .details {
+
+            border:
+                1px solid #dbeafe;
+
+            background: #f8fbff;
+
+            border-radius: 3px;
+
+            overflow: hidden;
+        }
+
+
+        .details-title {
+
+            padding:
+                12px
+                16px;
+
+            background: #eff6ff;
+
+            border-bottom:
+                1px solid #dbeafe;
+
+            color: #1e3a8a;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.7px;
+
+            text-transform: uppercase;
+        }
+
+
+        .row {
+
+            display: grid;
+
+            grid-template-columns:
+                145px
+                1fr;
+
+            min-height: 50px;
+
+            align-items: stretch;
+
+            border-bottom:
+                1px solid #e5edf7;
+        }
+
+
+        .row:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .label {
+
+            display: flex;
+
+            align-items: center;
+
+            padding:
+                12px
+                16px;
+
+            background:
+                rgba(
+                    239,
+                    246,
+                    255,
+                    0.65
+                );
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        .value {
+
+            display: flex;
+
+            align-items: center;
+
+            padding:
+                12px
+                16px;
+
+            color: #0f172a;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            word-break: break-word;
+        }
+
+
+        /* =========================================================
+           ACTION BUTTONS
+        ========================================================= */
+
+        .buttons {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 12px;
+
+            margin-top: 25px;
+        }
+
+
+        .buttons form {
+
+            margin: 0;
+
+            width: 100%;
+        }
+
+
+        button {
+
+            width: 100%;
+
+            min-height: 51px;
+
+            padding:
+                13px
+                18px;
+
+            border: none;
+
+            border-radius: 3px;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+
+        /* =========================================================
+           EDIT BUTTON
+        ========================================================= */
+
+        .edit {
+
+            background: #ffffff;
+
+            color: #334155;
+
+            border:
+                1px solid #cbd5e1;
+
+            box-shadow:
+                0 4px 10px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.05
+                );
+        }
+
+
+        .edit:hover {
+
+            background: #f8fbff;
+
+            border-color: #93c5fd;
+
+            color: #2563eb;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 18px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.08
+                );
+        }
+
+
+        /* =========================================================
+           CONFIRM BUTTON
+        ========================================================= */
+
+        .confirm {
+
+            background:
+                linear-gradient(
+                    100deg,
+                    #2563eb,
+                    #0ea5e9
+                );
+
+            color: #ffffff;
+
+            box-shadow:
+                0 8px 18px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.20
+                );
+        }
+
+
+        .confirm:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 12px 24px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.28
+                );
+
+            filter: brightness(1.03);
+        }
+
+
+        .confirm:active,
+        .edit:active {
+
+            transform:
+                translateY(0);
+        }
+
+
+        button:focus-visible {
+
+            outline:
+                3px solid
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.22
+                );
+
+            outline-offset: 2px;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 600px) {
+
+            body {
+
+                padding:
+                    18px
+                    12px;
+            }
+
+
+            .card-header {
+
+                padding:
+                    25px
+                    22px
+                    21px;
+            }
+
+
+            .content {
+
+                padding:
+                    22px
+                    22px
+                    25px;
+            }
+
+
+            h1 {
+
+                font-size: 25px;
+            }
+
+
+            .row {
+
+                grid-template-columns:
+                    120px
+                    1fr;
+            }
+
+
+            .label,
+            .value {
+
+                padding:
+                    11px
+                    12px;
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .buttons {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .photo img {
+
+                width: 140px;
+
+                height: 178px;
+            }
+
+        }
+
+
+        @media (max-width: 400px) {
+
+            .card-header {
+
+                padding:
+                    22px
+                    18px
+                    19px;
+            }
+
+
+            .content {
+
+                padding:
+                    19px
+                    18px
+                    22px;
+            }
+
+
+            h1 {
+
+                font-size: 23px;
+            }
+
+
+            .row {
+
+                grid-template-columns:
+                    105px
+                    1fr;
+            }
+
+
+            .label {
+
+                font-size: 12px;
+            }
+
+
+            .value {
+
+                font-size: 13px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="card">
+
+
+        <!-- =====================================================
+             TOP ACCENT
+        ====================================================== -->
+
+        <div class="top-accent"></div>
+
+
+        <!-- =====================================================
+             HEADER
+        ====================================================== -->
+
+        <div class="card-header">
+
+
+            <div class="header-label">
+
+                Student Portal
+
+            </div>
+
+
+            <h1>
+
+                Preview Your Details
+
+            </h1>
+
+
+            <div class="subtitle">
+
+                Check everything carefully before confirming.
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =====================================================
+             CONTENT
+        ====================================================== -->
+
+        <div class="content">
+
+
+            <!-- =================================================
+                 PHOTO
+            ================================================== -->
+
+            <div class="photo-section">
+
+                <div class="photo-frame">
+
+                    <div class="photo">
+
+                        <img
+                            src="/media/{{ photo }}"
+                            alt="Student Photo"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 DETAILS
+            ================================================== -->
+
+            <div class="details">
+
+
+                <div class="details-title">
+
+                    Student Information
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="label">
+
+                        Name
+
+                    </div>
+
+                    <div class="value">
+
+                        {{ name }}
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="label">
+
+                        To
+
+                    </div>
+
+                    <div class="value">
+
+                        {{ to_place }}
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="label">
+
+                        Roll No
+
+                    </div>
+
+                    <div class="value">
+
+                        {% if roll_no %}
+
+                            {{ roll_no }}
+
+                        {% else %}
+
+                            Not entered
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="label">
+
+                        Department
+
+                    </div>
+
+                    <div class="value">
+
+                        {{ department.name }}
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="label">
+
+                        Class
+
+                    </div>
+
+                    <div class="value">
+
+                        {{ department.class_name }}
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 ACTION BUTTONS
+            ================================================== -->
+
+            <div class="buttons">
+
+
+                <!-- EDIT -->
+
+                <form
+                    method="get"
+                    action="{% url 'student_form' %}"
+                >
+
+                    <button
+                        type="submit"
+                        class="edit"
+                    >
+
+                        Edit Details
+
+                    </button>
+
+                </form>
+
+
+                <!-- CONFIRM -->
+
+                <form
+                    method="post"
+                    action="{% url 'student_confirm' %}"
+                >
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="confirm"
+                    >
+
+                        Confirm & Submit
+
+                    </button>
+
+                </form>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

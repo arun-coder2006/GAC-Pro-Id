@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Confirm Delete - {{ year }}</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #f8fbff;
+            font-family:
+                Inter,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+            color: #0f172a;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #dbeafe;
+            padding: 30px;
+            box-shadow:
+                0 10px 35px
+                rgba(15, 23, 42, 0.10);
+            text-align: center;
+        }
+
+        .icon {
+            width: 55px;
+            height: 55px;
+            margin: 0 auto 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #fef2f2;
+            color: #dc2626;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        h2 {
+            margin: 0 0 12px;
+            font-size: 23px;
+            color: #0f172a;
+        }
+
+        .message {
+            margin: 0 0 12px;
+            color: #475569;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .count {
+            margin: 18px 0;
+            padding: 13px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            font-size: 14px;
+            color: #334155;
+        }
+
+        .count strong {
+            color: #dc2626;
+            font-size: 18px;
+        }
+
+        .warning {
+            margin-bottom: 22px;
+            color: #b91c1c;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        button,
+        a {
+            min-width: 130px;
+            padding: 11px 18px;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .delete-btn {
+            background: #dc2626;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #b91c1c;
+        }
+
+        .cancel-btn {
+            background: #475569;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #334155;
+        }
+
+        @media (max-width: 500px) {
+            .card {
+                padding: 24px 18px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            button,
+            a {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="icon">
+            !
+        </div>
+
+        <h2>
+            Delete Academic Year {{ year }}?
+        </h2>
+
+        <p class="message">
+            Are you sure you want to delete all student
+            records for academic year {{ year }}?
+        </p>
+
+        <div class="count">
+            Students to be deleted:
+            <strong>{{ student_count }}</strong>
+        </div>
+
+        <div class="warning">
+            This action cannot be undone.
+        </div>
+
+        <form
+    method="POST"
+    action="{% url 'admin_delete_year' year=year %}"
+>
+    {% csrf_token %}
+
+    <div class="actions">
+
+        <a
+            href="{% url 'admin_dashboard' %}"
+            class="cancel-btn"
+        >
+            Cancel
+        </a>
+
+        <button
+            type="submit"
+            class="delete-btn"
+        >
+            Yes, Delete
+        </button>
+
+    </div>
+</form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

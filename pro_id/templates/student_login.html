@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Student Login - GAC-Pro-I'd
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 30px 20px;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: #0f172a;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(56, 189, 248, 0.20),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(37, 99, 235, 0.15),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #f8fbff 0%,
+                    #eaf6ff 48%,
+                    #f8fbff 100%
+                );
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        /* =========================================
+           TECHNICAL BACKGROUND
+           ========================================= */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            background-image:
+                linear-gradient(
+                    rgba(37, 99, 235, 0.035) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(37, 99, 235, 0.035) 1px,
+                    transparent 1px
+                );
+
+            background-size: 42px 42px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 90%
+                );
+        }
+
+
+        /* =========================================
+           LOGIN CONTAINER
+           ========================================= */
+
+        .login-box {
+
+            width: 100%;
+
+            max-width: 430px;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.96
+            );
+
+            padding: 42px 40px 36px;
+
+            border-radius: 4px;
+
+            border:
+                1px solid
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.16
+                );
+
+            box-shadow:
+                0 20px 50px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.10
+                ),
+                0 0 0 1px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.7
+                );
+
+            position: relative;
+
+            overflow: hidden;
+
+            animation:
+                loginAppear
+                0.55s
+                ease-out;
+        }
+
+
+        /* =========================================
+           TOP BLUE ACCENT
+           ========================================= */
+
+        .login-box::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 4px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #38bdf8,
+                    #2563eb
+                );
+        }
+
+
+        /* =========================================
+           TECHNICAL CORNER ACCENT
+           ========================================= */
+
+        .login-box::after {
+
+            content: "";
+
+            position: absolute;
+
+            right: 0;
+
+            bottom: 0;
+
+            width: 85px;
+
+            height: 85px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    transparent 49%,
+                    rgba(
+                        37,
+                        99,
+                        235,
+                        0.08
+                    ) 50%
+                );
+
+            pointer-events: none;
+        }
+
+
+        /* =========================================
+           TITLE
+           ========================================= */
+
+        h1 {
+
+            margin: 0;
+
+            text-align: center;
+
+            color: #0f172a;
+
+            font-size: 30px;
+
+            font-weight: 750;
+
+            letter-spacing: -0.8px;
+
+            line-height: 1.2;
+        }
+
+
+        /* =========================================
+           DEPARTMENT
+           ========================================= */
+
+        .department {
+
+            margin-top: 10px;
+
+            margin-bottom: 30px;
+
+            text-align: center;
+
+            color: #2563eb;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.5px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =========================================
+           ERROR MESSAGE
+           ========================================= */
+
+        .message {
+
+            margin-bottom: 20px;
+
+            padding: 12px 14px;
+
+            border-radius: 3px;
+
+            border-left:
+                4px solid
+                #dc2626;
+
+            background:
+                #fff1f2;
+
+            color: #b91c1c;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+            text-align: left;
+        }
+
+
+        /* =========================================
+           LABEL
+           ========================================= */
+
+        label {
+
+            display: block;
+
+            margin-top: 19px;
+
+            margin-bottom: 8px;
+
+            color: #334155;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.15px;
+        }
+
+
+        /* =========================================
+           INPUT
+           ========================================= */
+
+        input {
+
+            width: 100%;
+
+            height: 48px;
+
+            padding:
+                0 14px;
+
+            border:
+                1px solid
+                #cbd5e1;
+
+            border-radius: 3px;
+
+            background:
+                #ffffff;
+
+            color: #0f172a;
+
+            font-family: inherit;
+
+            font-size: 15px;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+
+        input:hover {
+
+            border-color:
+                #94a3b8;
+        }
+
+
+        input:focus {
+
+            outline: none;
+
+            border-color:
+                #2563eb;
+
+            background:
+                #ffffff;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.10
+                );
+        }
+
+
+        input[readonly] {
+
+            background:
+                #f1f5f9;
+
+            color:
+                #64748b;
+
+            cursor:
+                not-allowed;
+        }
+
+
+        /* =========================================
+           LOGIN BUTTON
+           ========================================= */
+
+        button {
+
+            width: 100%;
+
+            height: 50px;
+
+            margin-top: 27px;
+
+            border: none;
+
+            border-radius: 3px;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    #2563eb,
+                    #0ea5e9
+                );
+
+            color: #ffffff;
+
+            font-family: inherit;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.3px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 20px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.20
+                );
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                filter 0.2s ease;
+        }
+
+
+        button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 12px 25px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.27
+                );
+
+            filter:
+                brightness(1.03);
+        }
+
+
+        button:active {
+
+            transform:
+                translateY(0);
+
+            box-shadow:
+                0 5px 12px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.18
+                );
+        }
+
+
+        /* =========================================
+           BACK LINK
+           ========================================= */
+
+        .back {
+
+            display: block;
+
+            margin-top: 22px;
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            text-decoration: none;
+
+            transition:
+                color 0.2s ease;
+        }
+
+
+        .back:hover {
+
+            color:
+                #2563eb;
+        }
+
+
+        /* =========================================
+           ANIMATION
+           ========================================= */
+
+        @keyframes loginAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(14px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 520px) {
+
+            body {
+
+                padding:
+                    20px 15px;
+            }
+
+            .login-box {
+
+                padding:
+                    36px 25px 30px;
+
+                max-width:
+                    100%;
+            }
+
+            h1 {
+
+                font-size:
+                    26px;
+            }
+
+            .department {
+
+                margin-bottom:
+                    25px;
+            }
+
+            input {
+
+                height:
+                    47px;
+            }
+
+            button {
+
+                height:
+                    49px;
+            }
+        }
+
+
+        /* =========================================
+           SMALL MOBILE
+           ========================================= */
+
+        @media (max-width: 360px) {
+
+            .login-box {
+
+                padding:
+                    32px 20px 27px;
+            }
+
+            h1 {
+
+                font-size:
+                    24px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="login-box">
+
+
+    <h1>
+        Student Login
+    </h1>
+
+
+    <div class="department">
+
+        {{ department.name }}
+
+    </div>
+
+
+    <!-- =========================================
+         STUDENT ERROR MESSAGE
+         ========================================= -->
+
+    {% if error %}
+
+        <div class="message">
+
+            {{ error }}
+
+        </div>
+
+    {% endif %}
+
+
+    <!-- =========================================
+         STUDENT LOGIN FORM
+         ========================================= -->
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        <label>
+            Username
+        </label>
+
+        <input
+            type="text"
+            value="stud"
+            readonly
+        >
+
+
+        <label>
+            Application Number / Password
+        </label>
+
+        <input
+            type="text"
+            name="student_key"
+            required
+            autocomplete="off"
+        >
+
+
+        <button
+            type="submit"
+        >
+
+            Login
+
+        </button>
+
+
+    </form>
+
+
+    <a
+        href="{% url 'home' %}"
+        class="back"
+    >
+
+        ← Back to Departments
+
+    </a>
+
+
+</div>
+
+
+</body>
+
+</html>

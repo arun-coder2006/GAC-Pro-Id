@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>GAC-Pro-I'd</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #07152f 0%,
+                    #0d2b5c 50%,
+                    #123f78 100%
+                );
+
+            color: white;
+
+            position: relative;
+        }
+
+
+        /* BACKGROUND */
+
+        .background {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+
+        .grid {
+            position: absolute;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.035) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.035) 1px,
+                    transparent 1px
+                );
+
+            background-size: 45px 45px;
+        }
+
+
+        .circle {
+            position: absolute;
+
+            border-radius: 50%;
+
+            border: 1px solid
+                rgba(125, 211, 252, 0.15);
+
+            animation:
+                float 8s ease-in-out infinite;
+        }
+
+
+        .circle.one {
+            width: 280px;
+            height: 280px;
+
+            top: -100px;
+            left: -80px;
+        }
+
+
+        .circle.two {
+            width: 420px;
+            height: 420px;
+
+            right: -180px;
+            bottom: -170px;
+
+            animation-delay: 2s;
+        }
+
+
+        .circle.three {
+            width: 160px;
+            height: 160px;
+
+            right: 20%;
+            top: 12%;
+
+            animation-delay: 4s;
+        }
+
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-20px)
+                    rotate(8deg);
+            }
+        }
+
+
+        /* MAIN CONTENT */
+
+        .content {
+
+            position: relative;
+
+            z-index: 2;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+            padding: 25px;
+        }
+
+
+        /* LABEL */
+
+        .label {
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            color: #7dd3fc;
+
+            margin-bottom: 18px;
+
+            opacity: 0;
+
+            animation:
+                fadeUp 0.8s ease forwards;
+        }
+
+
+        /* TITLE */
+
+        h1 {
+
+            margin: 0;
+
+            font-size: clamp(
+                42px,
+                8vw,
+                78px
+            );
+
+            font-weight: 800;
+
+            letter-spacing: -2px;
+
+            line-height: 1;
+
+            color: white;
+
+            opacity: 0;
+
+            animation:
+                fadeUp 0.8s ease 0.15s
+                forwards;
+        }
+
+
+        /* SUBTITLE */
+
+        .subtitle {
+
+            margin-top: 18px;
+
+            max-width: 650px;
+
+            font-size: clamp(
+                15px,
+                2vw,
+                18px
+            );
+
+            color: #cbd5e1;
+
+            line-height: 1.6;
+
+            opacity: 0;
+
+            animation:
+                fadeUp 0.8s ease 0.3s
+                forwards;
+        }
+
+
+        /* TECH LINE */
+
+        .tech-line {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-top: 28px;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            letter-spacing: 1px;
+
+            opacity: 0;
+
+            animation:
+                fadeUp 0.8s ease 0.45s
+                forwards;
+        }
+
+
+        .tech-line::before,
+        .tech-line::after {
+
+            content: "";
+
+            width: 55px;
+
+            height: 1px;
+
+            background:
+                rgba(
+                    125,
+                    211,
+                    252,
+                    0.5
+                );
+        }
+
+
+        /* CONTINUE BUTTON */
+
+        .continue-btn {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            margin-top: 38px;
+
+            min-width: 190px;
+
+            padding: 14px 25px;
+
+            border: 1px solid
+                rgba(
+                    125,
+                    211,
+                    252,
+                    0.45
+                );
+
+            border-radius: 50px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            backdrop-filter: blur(8px);
+
+            box-shadow:
+                0 0 25px
+                rgba(
+                    56,
+                    189,
+                    248,
+                    0.12
+                );
+
+            transition:
+                transform 0.3s ease,
+                background 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+
+            opacity: 0;
+
+            animation:
+                fadeUp 0.8s ease 0.6s
+                forwards;
+        }
+
+
+        .continue-btn:hover {
+
+            transform:
+                translateY(-3px);
+
+            border-color:
+                #7dd3fc;
+
+            background:
+                rgba(
+                    56,
+                    189,
+                    248,
+                    0.15
+                );
+
+            box-shadow:
+                0 0 35px
+                rgba(
+                    56,
+                    189,
+                    248,
+                    0.25
+                );
+        }
+
+
+        .arrow {
+
+            font-size: 20px;
+
+            transition:
+                transform 0.3s ease;
+        }
+
+
+        .continue-btn:hover .arrow {
+
+            transform:
+                translateX(5px);
+        }
+
+
+        /* BOTTOM */
+
+        .bottom {
+
+            position: absolute;
+
+            bottom: 25px;
+
+            left: 0;
+
+            right: 0;
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            letter-spacing: 1px;
+
+            z-index: 3;
+
+            opacity: 0;
+
+            animation:
+                fadeIn 1s ease 1s
+                forwards;
+        }
+
+
+        /* ANIMATIONS */
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .subtitle {
+                max-width: 340px;
+            }
+
+
+            .tech-line::before,
+            .tech-line::after {
+                width: 30px;
+            }
+
+
+            .continue-btn {
+                min-width: 175px;
+                padding: 13px 22px;
+            }
+        }
+
+
+        @media (max-width: 400px) {
+
+            h1 {
+                font-size: 40px;
+            }
+
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+
+            .tech-line {
+                font-size: 10px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="background">
+
+        <div class="grid"></div>
+
+        <div class="circle one"></div>
+
+        <div class="circle two"></div>
+
+        <div class="circle three"></div>
+
+    </div>
+
+
+    <div class="content">
+
+
+        <div class="label">
+            Government Arts College
+        </div>
+
+
+        <h1>
+            GAC-Pro-I'd
+        </h1>
+
+
+        <div class="subtitle">
+
+            Provisional Identity Card
+            Generation System
+
+        </div>
+
+
+        <div class="tech-line">
+
+            SECURE
+            •
+            SIMPLE
+            •
+            DIGITAL
+
+        </div>
+
+
+        <!-- DJANGO HOME URL -->
+
+        <a
+            href="{% url 'home' %}"
+            class="continue-btn"
+        >
+
+            Continue
+
+            <span class="arrow">
+                →
+            </span>
+
+        </a>
+
+
+    </div>
+
+
+    <div class="bottom">
+
+        PROVISIONAL ID CARD PORTAL
+
+    </div>
+
+
+</body>
+
+</html>

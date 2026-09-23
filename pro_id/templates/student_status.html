@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Already Submitted - GAC-Pro-I'D
+    </title>
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+           ===================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8fbff 0%,
+                    #eef8ff 48%,
+                    #e0f2fe 100%
+                );
+
+            color: #0f172a;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 32px 20px;
+
+            position: relative;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           BACKGROUND DECORATION
+           ===================================================== */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            width: 420px;
+
+            height: 420px;
+
+            top: -190px;
+
+            right: -150px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(56, 189, 248, 0.22),
+                    transparent 70%
+                );
+
+            pointer-events: none;
+        }
+
+
+        body::after {
+
+            content: "";
+
+            position: fixed;
+
+            width: 380px;
+
+            height: 380px;
+
+            bottom: -180px;
+
+            left: -160px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(37, 99, 235, 0.14),
+                    transparent 70%
+                );
+
+            pointer-events: none;
+        }
+
+
+        /* =====================================================
+           MAIN PANEL
+           ===================================================== */
+
+        .container {
+
+            width: 100%;
+
+            max-width: 620px;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.96
+            );
+
+            border: 1px solid #dbeafe;
+
+            border-radius: 6px;
+
+            padding: 42px;
+
+            text-align: center;
+
+            position: relative;
+
+            z-index: 1;
+
+            box-shadow:
+                0 20px 50px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.10
+                );
+
+            animation:
+                panelIn
+                0.55s
+                ease-out;
+        }
+
+
+        @keyframes panelIn {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(18px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* =====================================================
+           TOP ACCENT
+           ===================================================== */
+
+        .top-line {
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            right: 0;
+
+            height: 4px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #38bdf8,
+                    #2563eb
+                );
+        }
+
+
+        /* =====================================================
+           STATUS ICON
+           ===================================================== */
+
+        .success-icon {
+
+            width: 76px;
+
+            height: 76px;
+
+            margin: 0 auto 22px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e0f2fe,
+                    #dbeafe
+                );
+
+            border: 1px solid #bae6fd;
+
+            color: #2563eb;
+
+            font-size: 34px;
+
+            font-weight: 700;
+
+            border-radius: 4px;
+
+            box-shadow:
+                0 8px 22px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.10
+                );
+
+            animation:
+                iconIn
+                0.65s
+                ease-out;
+        }
+
+
+        @keyframes iconIn {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    scale(0.85);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    scale(1);
+            }
+        }
+
+
+        /* =====================================================
+           HEADING
+           ===================================================== */
+
+        h1 {
+
+            margin: 0;
+
+            color: #0f172a;
+
+            font-size: 28px;
+
+            line-height: 1.2;
+
+            font-weight: 750;
+
+            letter-spacing: -0.5px;
+        }
+
+
+        h1::after {
+
+            content: "";
+
+            display: block;
+
+            width: 46px;
+
+            height: 3px;
+
+            margin: 14px auto 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #38bdf8
+                );
+        }
+
+
+        /* =====================================================
+           MESSAGE
+           ===================================================== */
+
+        .message {
+
+            margin: 20px auto 28px;
+
+            max-width: 500px;
+
+            color: #475569;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           DETAILS PANEL
+           ===================================================== */
+
+        .details {
+
+            width: 100%;
+
+            text-align: left;
+
+            background: #f8fbff;
+
+            border: 1px solid #dbeafe;
+
+            border-radius: 4px;
+
+            padding: 6px 20px;
+
+            margin-bottom: 26px;
+        }
+
+
+        .details p {
+
+            margin: 0;
+
+            padding: 15px 0;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 14px;
+
+            color: #334155;
+
+            border-bottom:
+                1px solid #e2e8f0;
+        }
+
+
+        .details p:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .details strong {
+
+            min-width: 115px;
+
+            color: #0f172a;
+
+            font-weight: 650;
+
+            position: relative;
+        }
+
+
+        .details strong::after {
+
+            content: ":";
+
+            position: absolute;
+
+            right: 4px;
+        }
+
+
+        /* =====================================================
+           HOME BUTTON
+           ===================================================== */
+
+        .home-btn {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 100%;
+
+            min-height: 48px;
+
+            padding: 13px 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #0ea5e9
+                );
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            border: none;
+
+            border-radius: 4px;
+
+            font-size: 15px;
+
+            font-weight: 650;
+
+            letter-spacing: 0.1px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.22
+                );
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                filter 0.2s ease;
+        }
+
+
+        .home-btn:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 12px 25px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.28
+                );
+
+            filter:
+                brightness(1.03);
+        }
+
+
+        .home-btn:active {
+
+            transform:
+                translateY(0);
+
+            box-shadow:
+                0 5px 12px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.20
+                );
+        }
+
+
+        /* =====================================================
+           DOWNLOAD BUTTON
+           ===================================================== */
+
+        .download-btn {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 100%;
+
+            min-height: 48px;
+
+            margin-top: 12px;
+
+            padding: 13px 20px;
+
+            background: #ffffff;
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            border: 1px solid #93c5fd;
+
+            border-radius: 4px;
+
+            font-size: 15px;
+
+            font-weight: 650;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .download-btn:hover {
+
+            background: #eff6ff;
+
+            border-color: #2563eb;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 18px
+                rgba(
+                    37,
+                    99,
+                    235,
+                    0.12
+                );
+        }
+
+
+        .download-btn:active {
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =====================================================
+           NOTE
+           ===================================================== */
+
+        .note {
+
+            margin-top: 20px;
+
+            padding-top: 17px;
+
+            border-top:
+                1px solid #e2e8f0;
+
+            color: #64748b;
+
+            font-size: 12.5px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 600px) {
+
+            body {
+
+                padding: 20px 14px;
+            }
+
+            .container {
+
+                padding: 34px 22px;
+
+                max-width: 100%;
+            }
+
+            .success-icon {
+
+                width: 68px;
+
+                height: 68px;
+
+                font-size: 30px;
+
+                margin-bottom: 18px;
+            }
+
+            h1 {
+
+                font-size: 24px;
+            }
+
+            .message {
+
+                font-size: 14px;
+
+                margin-top: 18px;
+
+                margin-bottom: 24px;
+            }
+
+            .details {
+
+                padding:
+                    4px 16px;
+            }
+
+            .details p {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 4px;
+
+                padding: 13px 0;
+            }
+
+            .details strong {
+
+                min-width: 0;
+
+                font-size: 13px;
+
+                color: #2563eb;
+            }
+
+            .details strong::after {
+
+                display: none;
+            }
+
+            .home-btn,
+            .download-btn {
+
+                min-height: 50px;
+            }
+        }
+
+
+        /* =====================================================
+           SMALL MOBILE
+           ===================================================== */
+
+        @media (max-width: 380px) {
+
+            body {
+
+                padding: 14px 10px;
+            }
+
+            .container {
+
+                padding: 30px 17px;
+            }
+
+            h1 {
+
+                font-size: 22px;
+            }
+
+            .message {
+
+                font-size: 13.5px;
+            }
+
+            .details p {
+
+                font-size: 13.5px;
+            }
+
+            .home-btn,
+            .download-btn {
+
+                font-size: 14px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="top-line"></div>
+
+
+    <!-- =====================================================
+         SUCCESS STATUS
+         ===================================================== -->
+
+    <div class="success-icon">
+
+        ✓
+
+    </div>
+
+
+    <h1>
+
+        Already Submitted
+
+    </h1>
+
+
+    <!-- =====================================================
+         MESSAGE
+         ===================================================== -->
+
+    <div class="message">
+
+        Your provisional ID card details have already been
+        submitted successfully.
+
+    </div>
+
+
+    <!-- =====================================================
+         STUDENT DETAILS
+         ===================================================== -->
+
+    <div class="details">
+
+
+        <p>
+
+            <strong>
+                Name
+            </strong>
+
+            <span>
+                {{ student.name }}
+            </span>
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Department
+            </strong>
+
+            <span>
+                {{ department.name }}
+            </span>
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                To
+            </strong>
+
+            <span>
+                {{ student.to_place }}
+            </span>
+
+        </p>
+
+
+        {% if student.roll_no %}
+
+        <p>
+
+            <strong>
+                Roll No
+            </strong>
+
+            <span>
+                {{ student.roll_no }}
+            </span>
+
+        </p>
+
+        {% endif %}
+
+
+    </div>
+
+
+    <!-- =====================================================
+         HOME
+         ===================================================== -->
+
+    <a
+        href="{% url 'home' %}"
+        class="home-btn"
+    >
+
+        Back to Home
+
+    </a>
+
+
+    <!-- =====================================================
+         REPRESENTATIVE DOWNLOAD
+         ===================================================== -->
+
+    {% if student.is_leader %}
+
+    <a
+        href="{% url 'student_download' %}"
+        class="download-btn"
+    >
+
+        Download Provisional ID
+
+    </a>
+
+    {% endif %}
+
+
+    <!-- =====================================================
+         NOTE
+         ===================================================== -->
+
+    <div class="note">
+
+        You cannot submit the provisional ID card details again
+        using the same application number/password.
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
